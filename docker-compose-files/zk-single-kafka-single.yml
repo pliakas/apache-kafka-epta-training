@@ -1,32 +1,22 @@
-version: '3.8'
-volumes:
-  zksingle-ksingle_kafka1-data:
-  zksingle-ksingle_zoo1-data:
-  zksingle-ksingle_zoo1-log:
+version: '2.1'
 
 services:
   zoo1:
-    image: confluentinc/cp-zookeeper:6.2.1
+    image: zookeeper:3.4.9
     hostname: zoo1
-    container_name: zoo1
     ports:
       - "2181:2181"
     environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_SERVER_ID: 1
-      ZOOKEEPER_SERVERS: zoo1:2888:3888
+      ZOO_MY_ID: 1
+      ZOO_PORT: 2181
+      ZOO_SERVERS: server.1=zoo1:2888:3888
     volumes:
-      - type: volume
-        source: zksingle-ksingle_zoo1-data
-        target: /data
-      - type: volume
-        source: zksingle-ksingle_zoo1-log
-        target: /datalog
+      - ./zk-single-kafka-single/zoo1/data:/data
+      - ./zk-single-kafka-single/zoo1/datalog:/datalog
 
   kafka1:
-    image: confluentinc/cp-kafka:6.2.1
+    image: confluentinc/cp-kafka:5.5.1
     hostname: kafka1
-    user: "appuser:appuser"
     ports:
       - "9092:9092"
       - "9999:9999"
@@ -43,8 +33,6 @@ services:
       KAFKA_JMX_PORT: 9999
       KAFKA_JMX_HOSTNAME: ${DOCKER_HOST_IP:-127.0.0.1}
     volumes:
-      - type: volume
-        source: zksingle-ksingle_kafka1-data
-        target: /var/lib/kafka/data
+      - ./zk-single-kafka-single/kafka1/data:/var/lib/kafka/data
     depends_on:
       - zoo1
