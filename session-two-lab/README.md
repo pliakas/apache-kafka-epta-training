@@ -60,7 +60,7 @@ docker exec -ti kafka1 kafka-topics --list --bootstrap-server localhost:9092
 docker exec -ti kafka1 kafka-console-producer --broker-list localhost:9092 --topic fruits_inventory
 ```
 
-*Hint*: Open a new terminal and execute the above command. 
+*Hint*: Open a new terminal and execute the above command. -
 
 4. Type in a few lines of test data. Since we are working with merely test data, a specific format is not required. It could look like this:
 
