@@ -1,25 +1,17 @@
 # Epta :: Apache Kafka 
 
-Once you have started your cluster, you can use Conduktor to easily manage it. 
-Just connect against `localhost:9092` if using Docker.
-
-# kafka-stack-docker-compose
+# Docker Compose Files
 
 This replicates as well as possible real deployment configurations, where you have your zookeeper servers and kafka servers actually all distinct from each other. This solves all the networking hurdles that comes with Docker and docker-compose, and is compatible cross platform.
 
 ## Stack version
 
-  - Zookeeper version: 3.5.9
-  - Kafka version: 2.8.0 (Confluent 6.2.1)
-  - Kafka Schema Registry: Confluent 6.2.1
-  - Kafka Rest Proxy: Confluent 6.2.1
-  - Kafka Connect: Confluent 6.2.1
-  - ksqlDB Server: Confluent 6.2.1
-  - Zoonavigator: 0.8.0
-
-For a UI tool to access your local Kafka cluster, use the free version of [Conduktor](https://www.conduktor.io/download)
+  - Zookeeper version: 3.6.3 (Confluent 7.1.1)
+  - Kafka version: 3.1.0 (Confluent 7.1.1)
 
 # Requirements
+
+You need later docker version for different operating systems.
 
 ## Docker
 
@@ -39,14 +31,12 @@ This configuration fits most development requirements.
 
 Run with:
 ```
-docker-compose -f zk-single-kafka-single.yml up
-docker-compose -f zk-single-kafka-single.yml down
+docker-compose -f single_zookeeper_single_kafka.yml up
 ```
 
 Clean state (zookeeper & kafka) with : 
 ```
-docker-compose -f zk-single-kafka-single.yml down
-docker-compose -f zk-single-kafka-single.yml rm
+docker-compose -f single_zookeeper_single_kafka.yml down
 ```
 
 ## Single Zookeeper / Multiple Kafka
@@ -59,78 +49,12 @@ If you want to have three brokers and experiment with kafka replication / fault-
 
 Run with:
 ```
-docker-compose -f zk-single-kafka-multiple.yml up
-docker-compose -f zk-single-kafka-multiple.yml down
+docker-compose -f single_zookeeper_multiple_kafka.yml up
 ```
 
 Clean state (zookeeper & kafka) with :
 ```
-docker-compose -f zk-single-kafka-multiple.yml down
-docker-compose -f zk-single-kafka-multiple.yml rm
-```
-
-## Multiple Zookeeper / Single Kafka
-
-If you want to have three zookeeper nodes and experiment with zookeeper fault-tolerance.
-
-- Zookeeper will be available at `$DOCKER_HOST_IP:2181,$DOCKER_HOST_IP:2182,$DOCKER_HOST_IP:2183`
-- Kafka will be available at `$DOCKER_HOST_IP:9092`
-- (experimental) JMX port at `$DOCKER_HOST_IP:9999`
-
-Run with:
-```
-docker-compose -f zk-multiple-kafka-single.yml up
-docker-compose -f zk-multiple-kafka-single.yml down
-```
-
-Clean state (zookeeper & kafka) with :
-```
-docker-compose -f zk-multiple-kafka-single.yml down
-docker-compose -f zk-multiple-kafka-single.yml rm
-```
-
-## Multiple Zookeeper / Multiple Kafka
-
-If you want to have three zookeeper nodes and three kafka brokers to experiment with production setup.
-
-- Zookeeper will be available at `$DOCKER_HOST_IP:2181,$DOCKER_HOST_IP:2182,$DOCKER_HOST_IP:2183`
-- Kafka will be available at `$DOCKER_HOST_IP:9092,$DOCKER_HOST_IP:9093,$DOCKER_HOST_IP:9094`
-
-Run with:
-```
-docker-compose -f zk-multiple-kafka-multiple.yml up
-docker-compose -f zk-multiple-kafka-multiple.yml down
-```
-
-Clean state (zookeeper & kafka) with :
-```
-docker-compose -f zk-multiple-kafka-multiple.yml down
-docker-compose -f zk-multiple-kafka-multiple.yml rm
-```
-
-## Full stack
-
-Need a UI? We recommend using [Conduktor](https://conduktor.io) as your tool to bring a unified UI to all these components
-
- - Single Zookeeper: `$DOCKER_HOST_IP:2181`
- - Single Kafka: `$DOCKER_HOST_IP:9092`
- - Kafka Schema Registry: `$DOCKER_HOST_IP:8081`
- - Kafka Rest Proxy: `$DOCKER_HOST_IP:8082`
- - Kafka Connect: `$DOCKER_HOST_IP:8083`
- - KSQL Server: `$DOCKER_HOST_IP:8088`
- - Zoonavigator Web: `$DOCKER_HOST_IP:8004`
-- (experimental) JMX port at `$DOCKER_HOST_IP:9999`
-
- Run with:
- ```
- docker-compose -f full-stack.yml up
- docker-compose -f full-stack.yml down
- ```
-
-Clean state (zookeeper & kafka) with :
-```
-docker-compose -f full-stack.yml down
-docker-compose -f full-stack.yml rm
+docker-compose -f single_zookeeper_multiple_kafka.yml down
 ```
 
 # FAQ
@@ -200,24 +124,4 @@ For example, if the IP of your machine is `50.10.2.3`, follow the sample mapping
     environment:
       ...
       KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka2:19093,LISTENER_DOCKER_EXTERNAL://50.10.2.3:9093
-```
-
-**Q: How do I add connectors to kafka connect?**
-
-Create a `connectors` directory and place your connectors there (usually in a subdirectory) `connectors/example/my.jar`
-
-The directory is automatically mounted by the `kafka-connect` Docker container
-
-OR edit the bash command which pulls connectors at runtime
-
-```
-confluent-hub install --no-prompt debezium/debezium-connector-mysql:latest
-        confluent-hub install 
-```
-
-**Q: How to disable Confluent metrics?**
-
-Add this environment variable
-```
-KAFKA_CONFLUENT_SUPPORT_METRICS_ENABLE=false
 ```

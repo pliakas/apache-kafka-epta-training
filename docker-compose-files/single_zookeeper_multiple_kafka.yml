@@ -1,14 +1,8 @@
-version: '3.8'
-volumes:
-  sksingle-kmultiple_kafka1-data:
-  sksingle-kmultiple_kafka2-data:
-  sksingle-kmultiple_kafka3-data:
-  sksingle-kmultiple_zoo1-data:
-  sksingle-kmultiple_zoo1-log:
+version: '2.1'
 
 services:
   zoo1:
-    image: confluentinc/cp-zookeeper:6.2.1
+    image: confluentinc/cp-zookeeper:7.1.1
     hostname: zoo1
     container_name: zoo1
     ports:
@@ -17,18 +11,12 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_SERVER_ID: 1
       ZOOKEEPER_SERVERS: zoo1:2888:3888
-    volumes:
-      - type: volume
-        source: sksingle-kmultiple_zoo1-data
-        target: /data
-      - type: volume
-        source: sksingle-kmultiple_zoo1-log
-        target: /datalog
 
 
   kafka1:
-    image: confluentinc/cp-kafka:6.2.1
+    image: confluentinc/cp-kafka:7.1.1
     hostname: kafka1
+    container_name: kafka1
     ports:
       - "9092:9092"
     environment:
@@ -38,16 +26,15 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: "zoo1:2181"
       KAFKA_BROKER_ID: 1
       KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
-    volumes:
-      - type: volume
-        source: sksingle-kmultiple_kafka1-data
-        target: /var/lib/kafka/data
+      KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
+      KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
     depends_on:
       - zoo1
 
   kafka2:
-    image: confluentinc/cp-kafka:6.2.1
+    image: confluentinc/cp-kafka:7.1.1
     hostname: kafka2
+    container_name: kafka2
     ports:
       - "9093:9093"
     environment:
@@ -57,17 +44,16 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: "zoo1:2181"
       KAFKA_BROKER_ID: 2
       KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
-    volumes:
-      - type: volume
-        source: sksingle-kmultiple_kafka2-data
-        target: /var/lib/kafka/data
+      KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
+      KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
     depends_on:
       - zoo1
 
 
   kafka3:
-    image: confluentinc/cp-kafka:6.2.1
+    image: confluentinc/cp-kafka:7.1.1
     hostname: kafka3
+    container_name: kafka3
     ports:
       - "9094:9094"
     environment:
@@ -77,9 +63,7 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: "zoo1:2181"
       KAFKA_BROKER_ID: 3
       KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
-    volumes:
-      - type: volume
-        source: sksingle-kmultiple_kafka3-data
-        target: /var/lib/kafka/data
+      KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
+      KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
     depends_on:
       - zoo1
