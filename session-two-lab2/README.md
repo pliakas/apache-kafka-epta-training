@@ -54,7 +54,7 @@ Creating the Kafka topic **session_two_first_topic** with *3* partitions and a r
 
 
 ```sh
-docker exec -it kafka1  kafka-topics --create --bootstrap-server 127.0.0.1:19092 --replication-factor 3 --partitions 1 --topic session_two_first_topic
+docker exec -it kafka1  kafka-topics --create --bootstrap-server 127.0.0.1:19092 --replication-factor 1 --partitions 3 --topic session_two_first_topic
 ```
 
 
@@ -273,3 +273,78 @@ and the output will be:
 ```sh
 session_two_third_topic
 ```
+
+## How to change a Kafka Topic Configuration
+Broker configurations impact how topic behave in Kafka. You can find all broker configurations in the Kafka documentation, and you may choose while running Kafka in production to use the defaults or set your own values. The parameters you will set will impact topic performance and behavior (some explanation will be provide below, but in the Kafka Internals Session a full details will be provided), and the defaults are usually fine, but some topics may need different values than the defaults, for example for the following values:
+
+  * Replication Factor
+  * Number of Partitions
+  * Message size
+  * Compression level
+  * Log Cleanup Policy
+  * Min Insync Replicas
+
+
+In order to override the Kafka Topics configuration defaults, we can use the `kafka-configs`. More details you can find [here](https://kafka.apache.org/documentation/#topicconfigs)
+
+### Changing ```min.insync.replicas``` of a Kafka topic
+
+Create a topic named configured-topic with 3 partitions and a replication factor of 1, using Kafka topics CLI, kafka-topics as described in previous sections. 
+
+```sh
+docker exec -it kafka1  kafka-topics --create --bootstrap-server 127.0.0.1:19092 --replication-factor 1 --partitions 3 --topic fun_topic
+```
+
+Describe the topic to check if there are any configuration override set for this topic.
+
+```sh
+docker exec -it kafka1  kafka-topics --describe --bootstrap-server 127.0.0.1:19092 --topic fun_topic
+```
+
+the output might be: 
+
+```sh
+Topic: fun_topic	TopicId: eLkka9WAQQmM6425SM5wSA	PartitionCount: 3	ReplicationFactor: 1	Configs: 
+	Topic: fun_topic	Partition: 0	Leader: 2	Replicas: 2	Isr: 2
+	Topic: fun_topic	Partition: 1	Leader: 3	Replicas: 3	Isr: 3
+	Topic: fun_topic	Partition: 2	Leader: 1	Replicas: 1	Isr: 1
+
+```
+
+There is no configuration override set. Set the `min.insync.replicas` value for the topic *fun_topic* to 2. 
+
+```sh 
+docker exec -it kafka1 kafka-configs --bootstrap-server localhost:19092 --alter --entity-type topics --entity-name fun_topic --add-config min.insync.replicas=2
+
+```
+
+the output of the command will be: 
+
+```sh
+Completed updating config for topic fun_topic.
+```
+
+Describe again the topic to verify that the changes happened: 
+
+```sh
+docker exec -it kafka1  kafka-topics --describe --bootstrap-server 127.0.0.1:19092 --topic fun_topic
+```
+
+and the output will be: 
+
+```sh
+opic: fun_topic	TopicId: eLkka9WAQQmM6425SM5wSA	PartitionCount: 3	ReplicationFactor: 1	Configs: min.insync.replicas=2
+	Topic: fun_topic	Partition: 0	Leader: 2	Replicas: 2	Isr: 2
+	Topic: fun_topic	Partition: 1	Leader: 3	Replicas: 3	Isr: 3
+	Topic: fun_topic	Partition: 2	Leader: 1	Replicas: 1	Isr: 1
+
+```
+
+You can observe that is a topic configuration override set (at the right side of the output) - min.insync.replicas=2.
+
+You can delete the configuration override by passing `--delete-config` in place of the `--add-config` flag. 
+
+```sh
+docker exec -it kafka1 kafka-configs --bootstrap-server localhost:19092 --alter --entity-type topics --entity-name fun_topic --delete-config min.insync.replicas
+```
+
