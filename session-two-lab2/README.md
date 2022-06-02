@@ -16,6 +16,7 @@ Successfully complete this lab by achieving the following learning objectives.
 - **Describe** a Kafka topic.
 - **Increase the number of partitions** of a Kafka topic. 
 - **Delete** a Kafka topic
+- **Override** Kafka topic configuration
 
 ## Prerequisites
 
@@ -285,7 +286,7 @@ Broker configurations impact how topic behave in Kafka. You can find all broker 
   * Min Insync Replicas
 
 
-In order to override the Kafka Topics configuration defaults, we can use the `kafka-configs`. More details you can find [here](https://kafka.apache.org/documentation/#topicconfigs)
+In order to override the Kafka Topics configuration defaults, we can use the `kafka-conφσfigs`. More details you can find [here](https://kafka.apache.org/documentation/#topicconfigs)
 
 ### Changing ```min.insync.replicas``` of a Kafka topic
 
