@@ -255,7 +255,6 @@ the output will be:
 ```sh
 session_two_first_topic
 session_two_third_topic
-
 ```
 
 
