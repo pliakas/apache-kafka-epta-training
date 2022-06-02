@@ -11,11 +11,11 @@ Kafka Topics CLI, , ***kafka-topics*** is used to create, delete, describe, or c
 ## Learning Objectives
 Successfully complete this lab by achieving the following learning objectives. 
 
-- How to **Create** a Kafka topic.
-- How to **List** Kafka topics.
-- How to **describe** a Kafka topic.
-- How to **Increase the number of partitions** of a Kafka topic. 
-- How to **delete** a Kafka topic
+- **Create** a Kafka topic.
+- **List** Kafka topics.
+- **Describe** a Kafka topic.
+- **Increase the number of partitions** of a Kafka topic. 
+- **Delete** a Kafka topic
 
 ## Prerequisites
 
@@ -40,10 +40,9 @@ docker-compose -f single_zookeeper_multiple_kafka.yml down
 ## Create a Kafka Topic
 
 To create a Kafka topic, we need to provide the mandatory parameters:
-  * If Kafka v2.2+, use the Kafka hostname and port e.g., localhost:9092
   * If older version of Kafka, use the Zookeeper URL and port e.g. localhost:2181 (*Not applicable for our lab*)
   * Provide the mandatory parameters: topic name, number of partitions and replication factor.
-  * Use the `kafka-topics.sh` CLI with the `--create** option
+  * Use the `kafka-topics.sh` CLI with the `--create` option
 
 
 
@@ -51,11 +50,11 @@ To create a Kafka topic, we need to provide the mandatory parameters:
 
 ### Example
 
-Creating the Kafka topic **session_two_first_topic** with *3* partitions and a replication factor of *1* assuming that the Kafka broker is running at `localhost:9092`
+Creating the Kafka topic **session_two_first_topic** with *3* partitions and a replication factor of *1* assuming that the Kafka broker is running at `localhost:9092` or inside the docker for port `localhost:19092`. For our cases we are using `localhost:19902` since we are executing the command from a **kafka1** docker instance
 
 
 ```sh
-docker exec -it kafka1  kafka-topics --create --bootstrap-server 127.0.0.1:19092 --replication-factor 1 --partitions 1 --topic session_two_first_topic
+docker exec -it kafka1  kafka-topics --create --bootstrap-server 127.0.0.1:19092 --replication-factor 3 --partitions 1 --topic session_two_first_topic
 ```
 
 
