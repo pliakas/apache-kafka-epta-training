@@ -1,9 +1,6 @@
 # Introduction
+In this lab, you will use `kafka-console-producer` to producer messages with various keys. 
 
-
-
-## Learning Objectives
-S
 ## Prerequisites
 
 1. You need to start up the apache kafka single node cluster using the command

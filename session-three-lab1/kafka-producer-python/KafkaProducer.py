@@ -34,7 +34,7 @@ def runProducer(producer, sendMessageCount):
 	try:
 		for index in range(timeNow, timeNow + sendMessageCount):
 
-                    # TODO: Implement producer using 'produce.produce' method.
+                        # TODO: Implement producer using 'produce.produce' method.
 
 	except BufferError as e:
             sys.stderr.write('%% Local producer queue is full (%d messages awaiting delivery): try again\n' %len(producer))
