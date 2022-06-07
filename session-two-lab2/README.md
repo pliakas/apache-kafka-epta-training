@@ -47,11 +47,11 @@ To create a Kafka topic, we need to provide the mandatory parameters:
 
 
 
-**Note***: For recent version of Kafka, we strongly recommend you to use the command with the --bootstrap-server option because the Zookeeper option is now deprecated and is removed as part of Kafka v3.
+**Note***: For recent version of Kafka, it is strongly recommended you to use the command with the --bootstrap-server option because the Zookeeper option is now deprecated and is removed as part of Kafka v3.
 
 ### Example
 
-Creating the Kafka topic **session_two_first_topic** with *3* partitions and a replication factor of *1* assuming that the Kafka broker is running at `localhost:9092` or inside the docker for port `localhost:19092`. For our cases we are using `localhost:19902` since we are executing the command from a **kafka1** docker instance
+Creating the Kafka topic **session_two_first_topic** with *3* partitions and a replication factor of *1* assuming that the Kafka broker is running at `localhost:9092` or inside the docker for port `localhost:19092`. For our cases we are using `localhost:19902` since we are executing the command from a **kafka1** docker instance.
 
 
 ```sh
