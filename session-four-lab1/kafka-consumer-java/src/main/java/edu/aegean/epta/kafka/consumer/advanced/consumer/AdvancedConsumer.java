@@ -111,6 +111,8 @@ public class AdvancedConsumer {
 
 
     public static void main(String... args) throws Exception {
+        System.setProperty("io.advantageous.boon.faststringutils.disable", "true");
+
 
         runConsumer();
     }
