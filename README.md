@@ -8,3 +8,5 @@ Apache Kafka Training Resources for EPTA educational courses
   * [Lab 2.1: Basic Topic Operations with Apache Kafka](session-two-lab2/README.md) - Instruction how to make basic topic operation using Command Line Interface provided by Apache Kafka. 
   * [Lab 3.1: Kafka Producers Lab](session-three-lab1/README.md) - Different labs for implementing and using kafka producer using CLI, Java and Python
   * [Lab 3.2: Kakka Procuer Assignent](session-three-lab2/advanced-kafka-producer-assignment/README.md) - Assignment for Kafka Producers.
+  * [Lab 4.1: Kafka Consumer Labs](session-four-lab1/README.md) - Different labs for implementing and using kafka consumer using CLI, Java, Python. 
+  * [Lab 4.2: Kafka Consumer Assignment](session-four-lab2/kafka-consumer-assignment/README.md) - Assignment for Kafka Producers
