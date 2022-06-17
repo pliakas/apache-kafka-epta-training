@@ -10,14 +10,14 @@ This example  demonstrates how to use Prometheus and Grafana for monitoring an A
 
 To startup the full stack you need to execute the command below: 
 ```sh
-docker-compose -f  zk-kafka-multiple-nodes-stack.yml up -d
+docker-compose -f  single-zookeeper-multiple-kafka.yml up
 ```
 ----
 
 To shutdown it you need to execute the following command, in a new terminal. 
 
 ```sh
-docker-compose -f  zk-kafka-multiple-nodes-stack.yml down
+docker-compose -f  single-zookeeper-multiple-kafka.yml down
 ```
 
 ### Multiple brokers WITHOUT zookeeper
@@ -25,7 +25,7 @@ docker-compose -f  zk-kafka-multiple-nodes-stack.yml down
 You can start kafka cluster WITHOUT zookeeper using the command: 
 
 ```sh
-docker-compose -f  zkless-kafka-multiple-nodes-stack.yml up 
+docker-compose -f zkless-kafka-multiple-nodes-stack.yml  up 
 ```
 
 
