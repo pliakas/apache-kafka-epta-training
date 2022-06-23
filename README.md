@@ -10,3 +10,4 @@ Apache Kafka Training Resources for EPTA educational courses
   * [Lab 3.2: Kakka Procuer Assignent](session-three-lab2/advanced-kafka-producer-assignment/README.md) - Assignment for Kafka Producers.
   * [Lab 4.1: Kafka Consumer Labs](session-four-lab1/README.md) - Different labs for implementing and using kafka consumer using CLI, Java, Python. 
   * [Lab 4.2: Kafka Consumer Assignment](session-four-lab2/kafka-consumer-assignment/README.md) - Assignment for Kafka Producers
+  * [Lab 5.1: Kafka Reliable Data Delivery](session-fibe-lab1/README.md) - Assignment for Reliable Data Delivery
