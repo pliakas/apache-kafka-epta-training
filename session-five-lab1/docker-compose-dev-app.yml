@@ -1,0 +1,44 @@
+version: '2.1'
+
+services:
+ 
+  java-producer:
+    image: epta/java-reliable-producer:latest
+    hostname: producer
+    container_name: producer
+    ports:
+      - 42052:8080
+    environment:
+      SPRING_KAFKA_BOOTSTRAP-SERVERS: "kafka1:19092,kafka2:19093,kafka3:19093"
+      SPRING_KAFKA_CONSUMER_BOOTSTRAP-SERVERS: "kafka1:19092,kafka2:19093,kafka3:19093"
+#      
+  java-consumer-1:
+    image: epta/java-reliable-consumer:latest
+    hostname: consumer1
+    container_name: consumer1
+    ports:
+      - 42060:8090
+    environment:
+      SPRING_KAFKA_BOOTSTRAP-SERVERS: "kafka1:19092,kafka2:19093,kafka3:19093"
+      SPRING_KAFKA_CONSUMER_BOOTSTRAP-SERVERS: "kafka1:19092,kafka2:19093,kafka3:19093"
+      
+  java-consumer-2:
+    image: epta/java-reliable-consumer:latest
+    hostname: consumer2
+    container_name: consumer2
+    ports:
+      - 42062:8090
+    environment:
+      SPRING_KAFKA_BOOTSTRAP-SERVERS: "kafka1:19092,kafka2:19093,kafka3:19093"
+      SPRING_KAFKA_CONSUMER_BOOTSTRAP-SERVERS: "kafka1:19092,kafka2:19093,kafka3:19093"
+      
+  java-consumer-3:
+    image: epta/java-reliable-consumer:latest
+    hostname: consumer3
+    container_name: consumer3
+    ports:
+      - 42064:8090
+    environment:
+      SPRING_KAFKA_BOOTSTRAP-SERVERS: "kafka1:19092,kafka2:19093,kafka3:19093"
+      SPRING_KAFKA_CONSUMER_BOOTSTRAP-SERVERS: "kafka1:19092,kafka2:19093,kafka3:19093"
+    

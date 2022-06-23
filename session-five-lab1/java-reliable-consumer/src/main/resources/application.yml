@@ -1,0 +1,34 @@
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- })
+                  {magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan}
+                  %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+  level:
+    ROOT: info
+    org.apache.kafka.clients: info
+    org.springframework.kafka: debug
+
+
+spring:
+  profiles:
+    active: dev
+
+
+  application:
+    name: java-reliable-producer
+
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092,localhost:9093,localhost:9093
+      group-id: roukou-group-id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+    template:
+      default-topic: session-five-topic
+    bootstrap-servers: localhost:9092,localhost:9093,localhost:9093
+
+
+server:
+  port: 8090

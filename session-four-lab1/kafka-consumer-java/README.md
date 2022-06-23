@@ -24,13 +24,13 @@ docker ps
 
 ```sh
 docker exec -it kafka1  kafka-topics --create --bootstrap-server 127.0.0.1:19092 --replication-factor 3 --partitions 
-3 --topic session-four-lab-topic-javac
+3 --topic session-four-lab-topic-java
 ```
 
 4. You need to startup a consumer that consume messages from the topic  **session-four-lab-topic-javac**
 
 ```sh
-docker exec -ti kafka1 kafka-console-producer --bootstrap-server localhost:19092 --topic session-four-lab-topic-javac
+docker exec -ti kafka1 kafka-console-producer --bootstrap-server localhost:19092 --topic session-four-lab-topic-java
 ```
 
 5. After the finish of the lab, you can stop the container using the command:
