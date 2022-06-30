@@ -105,10 +105,11 @@ you can check the zipkin traces to verify that there is a connection and communi
 To further extend this example you need to make the following actions: 
 
 ***[Assignment One]***
- Based on the above example create a hub and spoke architecture with three regional clusterand one global cluster. 
-* Create the following topics: (topic-user-profile, topic-orders, topic-user-transactions**, where the topics topic-user-profile and topic-user-transactions must be replicated to global cluster. 
+
+Based on the above example create a hub and spoke architecture with three regional clusterand one global cluster. Create the following topics: (topic-user-profile, topic-orders, topic-user-transactions**, where the topics topic-user-profile and topic-user-transactions must be replicated to global cluster. 
 
 **Verify that the data are correctly transmitted** and **Verify in zipkin that there is traffic going between traffic.** 
 
 ***[Assignment Two]***
+
 Create an active / active architecture, where two clusters are replicating all the topics that containing. Each cluster must have three topics with prefix `cluster_a_` and  `cluster_b_`. **Verify in zipkin that there is traffic going between traffic.**
