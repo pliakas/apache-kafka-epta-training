@@ -95,7 +95,7 @@ you can start the consumer on clusterB using the following command in second ter
 
 ```sh
 docker exec -ti session-eight-lab_kafka_2_1 kafka-console-consumer --bootstrap-server 127.0.0.1:29092 --topic replicated-topic --from-beginning
-`****
+```
 
 ## Zipkin
 
