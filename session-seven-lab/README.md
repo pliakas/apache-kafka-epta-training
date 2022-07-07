@@ -553,7 +553,7 @@ You need to implement the following architecture in docker compose file by combi
           +---------------v------------------+
           |                                  |
           |           Kafka Connect          |
-          |  (Debezium, JDBC, ES connectors) |
+          |                                  |
           |                                  |
           +---+-----------------------+------+
               |                       |
