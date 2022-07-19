@@ -81,6 +81,4 @@ class ConsumerApplicationTest {
         Thread.sleep(1_000);
         Assertions.assertThat(output).contains("Employee{id=1, name='Test'}");
     }
-
-
 }
