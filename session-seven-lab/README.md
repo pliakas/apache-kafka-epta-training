@@ -163,7 +163,6 @@ docker-compose-f docker-compose-connect-jdbc.yml  exec postgres bash -c 'psql -U
 (4 rows)
 ```
 
-As you can see there is no longer a 'Jane Doe' as a customer.
 
 
 Stop the  application:
@@ -533,7 +532,7 @@ End the application:
 
 ```shell
 # Shut down the cluster
-docker-compose -f docker-compose-es.yaml down
+docker-compose -f docker-compose-connect-elastic.yaml down
 ```
 
 ## Two Parallel Sinks ( MySQL -> Kafka Connect -> (ElasticSearch,PostgreSQL))
@@ -562,7 +561,7 @@ You need to implement the following architecture in docker compose file by combi
               |                       |
 +-------------v--+                +---v---------------+
 |                |                |                   |
-|   PostgreSQL   |                |   ElasticSearch   |
+|   Postgre       |               |   Elastic         |
 |                |                |                   |
 +----------------+                +-------------------+
 
