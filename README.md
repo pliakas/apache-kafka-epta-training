@@ -13,3 +13,5 @@ Apache Kafka Training Resources for EPTA educational courses
   * [Lab 5.1: Kafka Reliable Data Delivery](session-five-lab1/README.md) - Assignment for Reliable Data Delivery
   * [Lab 7.1: Kafka Data pipelines using kafka-connect](session-seven-lab/README.md) - Lab and assignment for building a data pipeline using Mysql,PostgreSQL and ElasticSerch
   * [Lab 8.1: Kafka Cross Cluster Mirroring](session-eight-lab/README.md) - Cross Cluster Mirroring exercises
+  * [Lab 9.1: Admin Client API](session-nine-lab/README.md) - Kafka's Admin Client API Introduction
+  * [Lab 11.1: Kafka Streams Introduction](session-eleven-lab/README.med) - Introduction to Kafka Streams
